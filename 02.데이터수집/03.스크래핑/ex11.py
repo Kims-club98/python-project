@@ -12,7 +12,7 @@ def scrap(section):
     soup=creat_soup(url)
     news=soup.find('ul', attrs={'class':'sa_list'})
     li=news.find_all('li',limit=5)
-    if il ==0: print('기사를 찾을 수 없습니다')
+    if li ==0: print('기사를 찾을 수 없습니다')
     for idx, item in enumerate(li):
         title=item.find('strong',attrs={'class':'sa_text_strong'}).getText()
         # print(idx+1, title)
