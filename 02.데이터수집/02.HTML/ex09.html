@@ -43,9 +43,10 @@
 </body>
 <script src="gm.json"></script>
 <script>
-$.getJSON('gm.jason', function(data))
-    temp=Handlebars.compile($("#temp").html())
+$.getJSON('gm.jason', function(data){
+    var temp=Handlebars.compile($("#temp").html())
     $("#product").html(temp(data))
+})
 </script>
 </html>
 
