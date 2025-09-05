@@ -21,9 +21,9 @@ time.sleep(2)
 soup=BeautifulSoup(browser.page_source, 'lxml')
 books=soup.find('div',{'class':'ser_list_wrap'}).find_all('li',{'class':'ser_bg'})
 
-list=[] #딕서너리 키: 값 ...
-for index, book in books:
-    no=index+1
+book_list=[] #딕서너리 키: 값 ...
+for book in books:
+    no=len(book_list) + 1
     title=book.strong.getText()
     image=book.img['src']
     autor=book.span.getText()
@@ -31,7 +31,7 @@ for index, book in books:
     print(title,image,autor,link)
 
     data={'no':no, 'title':title, 'image':image, 'autor':autor, 'link':link}
-    list.append(data)
+    book_list.append(data)
 
 # json파일에 저장
 import json
@@ -39,7 +39,7 @@ import json
 os.makedirs('data', exist_ok=True)
 
 
-with open('data/books.json','a',encoding='utf-8') as file:
+with open('data/books.json','w',encoding='utf-8') as file:
     json.dump(list, file, indent='\t', ensure_ascii=False)
 
 
