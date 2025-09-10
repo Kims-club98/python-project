@@ -1,7 +1,7 @@
 import pandas as pd
 import os
-file_score='data/학생성적.csv'
-file_info='data/학생정보.csv'
+file_score='D:/python-project/03.데이터분석/01시리즈/data/학생성적.csv'
+file_info='D:/python-project/03.데이터분석/01시리즈/data/학생정보.csv'
 
 def inputNum(title):
     while True:
@@ -14,7 +14,7 @@ def inputNum(title):
         else:
             return int(num)
 
-def Submenu():
+def submenu():
     while True:
         score= pd.read_csv(file_score, index_col='지원번호')
         info= pd.read_csv(file_info, index_col='지원번호')
@@ -66,7 +66,7 @@ def Submenu():
                     print(f"학교:{row['학교']}", end=' ')
                     for col in cols: #국영수과사 가지고 옴
                         print(f"{col}:{row[col]:.0f}",end=' ')
-                    print(f'평균:{row['평균']}:.2f')
+                    print(f"평균:{row['평균']}:.2f")
                     print()
                     print('-'*50)
                 input('아무키나 누르세요!')
@@ -74,29 +74,34 @@ def Submenu():
         elif menu=='3': #검색
             while True:
                 sel=inputNum('1.지원번호|2.학교|3.이름>')
-                if sel=='':break
+                if sel=='':
+                    break
                 elif sel==1: #inputnum은 정수 So '1'로은 인식을 못함
                     no=inputNum('지원번호>')
                     if not no in df.index:
                         print('해당 지원번호는 없습니다.')
                     else:
                         row=df.loc[no]
-                        print(f"지원번호:{no},이름:{row['이름']},학교:{row['학교']},평균:{row['평균']:.2f}")
+                        print(f"지원번호:{idx},이름:{row['이름']},학교:{row['학교']},평균:{row['평균']:.2f}")
                 elif sel==2:
                     word=input('학교명>')
                     filt=df['학교'].str.contains(word)
-                    if len(df):pass ####
+                    if len(df[filt].index)==0:
+                        print('검색내용이 없습니다.')
+                        continue
                     for idx in df[filt].index:
                         row=df.loc[idx]
-                        print(f"지원번호:{no},이름:{row['이름']},학교:{row['학교']},평균:{row['평균']:.2f}")
+                        print(f"지원번호:{idx},이름:{row['이름']},학교:{row['학교']},평균:{row['평균']:.2f}")
                 elif sel==3:
                     word=input('이름>')
                     filt=df['이름'].str.contains(word)
+                    if len(df[filt].index)==0:
+                        print('검색된 내용이 없습니다.')
+                        break
                     for idx in df[filt].index:
                         row=df.loc[idx]
-                        print(f"지원번호:{no},이름:{row['이름']},학교:{row['학교']},평균:{row['평균']:.2f}")
-        input('아무키나 누르세요!')
-
+                        print(f"지원번호:{idx},이름:{row['이름']},학교:{row['학교']},평균:{row['평균']:.2f}")
+            input('아무키나 누르세요!')
         elif menu=='4': #삭제
             no=inputNum('지원정보>')
             if not no in info.index:
@@ -141,4 +146,4 @@ def Submenu():
             input('0과 5사이를 입력하시오.')
 
 if __name__=='__main__':
-    Submenu()
+    submenu()

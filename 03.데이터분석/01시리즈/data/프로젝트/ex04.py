@@ -2,9 +2,7 @@ import pandas as pd
 import os
 from  ex05 import *
 
-file_name='data/학생정보.csv'
-score=pd.read_csv(file_name)
-cols=score.columns
+file_name='D:/python-project/03.데이터분석/01시리즈/data/학생정보.csv'
 
 def inputNum(title):
     while True:
@@ -21,6 +19,7 @@ while True:
     os.system('cls')
     info=pd.read_csv(file_name, index_col='지원번호')
     info.fillna('',inplace=True)
+    cols=info.columns
 
     print('-'*55)
     print('〓'*11+ ' 학생정보 ' +'〓'*11)
@@ -46,32 +45,47 @@ while True:
             info.to_csv(file_name)
             print('등록완료')
         input('아무키나 누르세요!')
+
     elif menu=='2':
         for idx in info.index:
             row=info.loc[idx]
-            print(f"지원번호:{idx}",end=',')
+            print(f"지원번호:{idx}",end=' ')
             for col in cols:
-                print(f"{col}:{row[col]}",end=',')
-                print()
-                print('-'*30)
+                print(f"{col}:{row[col]}",end=' ')
+            print()
+            print('-'*30)
         input('아무키나 누르세요!')
 
     elif menu=='3':
         while True:
-            sel=input('1.이름|2.학교|3.SW특기')
+            sel=input('1.이름|2.학교|3.SW특기>')
             if sel=='': break
             wd1=input('검색어>')
             if sel=='1': filt=info['이름'].str.contains(wd1)
-            elif sel=='2': filt=info['학교'].str.contain(wd1)
+            if sel=='':
+                print('번호를 선택해주세요!')
+                continue
+            elif sel=='2': filt=info['학교'].str.contains(wd1)
+            if sel=='':
+                print('번호를 선택해주세요!')
+                continue
             elif sel=='3': 
-                word=word.upper()
-                filt=info['SW특기'].str.upper.str.contain(wd1)
+                word=wd1.upper()
+                filt=info['SW특기'].str.upper().str.contains(wd1)
             idxs=info[filt].index
-            if len(idxs)==0: print("해당 레이어에 데이터가 존재하지 않음")
+            if sel=='':
+                print('번호를 선택해주세요!')
+                continue
+            if len(idxs)==0:
+                print("해당 레이어에 데이터가 존재하지 않음")
             else:
-                row = info.loc[idx]
-                print(f'지원번호:{idx}',end=',')
-            print()    
+                for idx in idxs:
+                    row = info.loc[idx]
+                    print(f'지원번호:{idx}',end=' ')
+                    for col in cols:
+                        print(f'{col}:{row[col]}')
+                    print()
+                    print('-'*50)    
         input('아무키나 누르세요')
     elif menu=='4': #삭제e,index=False)
         no=inputNum('지원번호>')
@@ -105,6 +119,6 @@ while True:
             print('지원번호가 존재하지 안습니다!')
         input('아무키나 누르세요!')
     elif menu=='6':
-        Submenu()
+        submenu()
     else:
         input('0에서 5사이를 입력하세요!')
