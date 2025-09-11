@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from  ex05 import *
 
-file_name='D:/python-project/03.데이터분석/01시리즈/data/학생정보.csv'
+file_name='C:/Python/03.데이터분석/01시리즈/data/학생정보.csv'
 
 def inputNum(title):
     while True:

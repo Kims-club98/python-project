@@ -1,7 +1,7 @@
 import pandas as pd
 import os
-file_score='D:/python-project/03.데이터분석/01시리즈/data/학생성적.csv'
-file_info='D:/python-project/03.데이터분석/01시리즈/data/학생정보.csv'
+file_score='C:/Python/03.데이터분석/01시리즈/data/학생성적.csv'
+file_info='C:/Python/03.데이터분석/01시리즈/data/학생정보.csv'
 
 def inputNum(title):
     while True:
@@ -145,5 +145,5 @@ def submenu():
         else:
             input('0과 5사이를 입력하시오.')
 
-if __name__=='__main__':
-    submenu()
+# if __name__=='__main__':
+#     submenu()
