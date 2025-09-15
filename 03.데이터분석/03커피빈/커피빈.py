@@ -19,7 +19,7 @@ time.sleep(2)
 
 list=[]
 for store in stores:
-    name=store.find('p',{'class':'name'}).find('span').contents[0]#여러개의 경우 contant로 가져옴
+    name=store.find('p',{'class':'name'}).find('span').contents[0]#여러개의 경우 contant로 가져옴 #세밀하게 가져올 경우 검사 내 span도 넣어줌
     address=store.find('p',{'class':'address'}).getText().strip()
     tel=store.find('p',{'class':'tel'}).getText().strip()
     print(name)
