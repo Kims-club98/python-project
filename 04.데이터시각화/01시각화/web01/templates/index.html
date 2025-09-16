@@ -11,7 +11,7 @@
     <title>{{title}}</title>
     <style>
         * {
-  font-family: "Black Han Sans", sans-serif;
+            font-family: "Jua", sans-serif;
         }
     </style>
 </head>
@@ -19,46 +19,46 @@
     <div class="container">
         <h1 id="title" class="text-center my-5">{{title}}</h1>
         <div class="text-center">
-            <button class id="btn1 btn.primary">학생별 키</button>
-            <button class id="btn2 btn.primary">학생별 평균</button>
-            <button class id="btn3 btn.primary">학생별 평균키</button>
-            <button class id="btn4 btn.primary">학생별 평균</button>
-            <button class id="btn5 btn.primary">학생별 SW특기인원</button>
+            <button id="btn1" class="btn btn-primary">학생별키</button>
+            <button id="btn2" class="btn btn-primary">학생별평균</button>
+            <button id="btn3" class="btn btn-primary">학교별평균키</button>
+            <button id="btn4" class="btn btn-primary">학교별평균</button>
+            <button id="btn5" class="btn btn-primary">SW특기별인원수</button>
         </div>
         <div class="text-center mt-5">
-            <img id="graph" src="http://placehold.co/500x300" width="50%">
+            <img id="graph" src="http://placehold.co/500x300" width="80%">
         </div>
-
     </div>
-  
 </body>
 <script>
     $("#btn1").on("click", function(){
         const title=$(this).html();
         $("#title").html(title)
-        $("#graph").attr("src", "/graph1"); //클릭을 하면 send파일을 받아 src로 이동
-    })//#btn1을 클릭하였을 때, function 이하 작업을 수행한다. //변하지 않는 선언 const
+        $("#graph").attr("src", "/graph1")
+    })
 
     $("#btn2").on("click", function(){
         const title=$(this).html();
-        $("#title").html(title);
-        $("#graph").attr("src", "/graph2");
-    })
-    $("#btn3").on("click", function(){
-        const title=$(this).html();
-        $("#title").html(title);
-        $("#graph").attr("src", "/graph3");
-    })
-    $("#btn4").on("click", function(){
-        const title=$(this).html();
-        $("#title").html(title);
-        $("#graph").attr("src", "/graph4");
-    })
-    $("#btn5").on("click", function(){
-        const title=$(this).html();
-        $("#title").html(title);
-        $("#graph").attr("src", "/graph5");
+        $("#title").html(title)
+        $("#graph").attr("src", "/graph2")
     })
 
+    $("#btn3").on("click", function(){
+        const title=$(this).html();
+        $("#title").html(title)
+        $("#graph").attr("src", "/graph3")
+    })
+
+    $("#btn4").on("click", function(){
+        const title=$(this).html();
+        $("#title").html(title)
+        $("#graph").attr("src", "/graph4")
+    })
+
+    $("#btn5").on("click", function(){
+        const title=$(this).html();
+        $("#title").html(title)
+        $("#graph").attr("src", "/graph5")
+    })
 </script>
 </html>

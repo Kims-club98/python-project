@@ -15,7 +15,7 @@ plt.rc('axes', unicode_minus = False)
 
 @app.route('/graph1') #학생별 막대 그래프
 def graph1():
-    df=pd.read_csv('data/score.csv',index_col='지원번호')
+    df=pd.read_csv("C:/Python/04.데이터시각화/01시각화/data/score.csv",index_col='지원번호')
     name=df['이름']
     height=df['키']
     plt.figure(figsize=(10,3))
@@ -25,9 +25,15 @@ def graph1():
     for idx, h in enumerate(height):
         plt.text(idx, h+2, h, color='darkgray',ha='center')
 
+    img=BytesIO()
+    plt.savefig(img, format='png')
+    plt.close()
+    img.seek(0)
+    return send_file(img, mimetype='image/png')
+
 @app.route('/graph2')
 def graph2():
-    df=pd.read_csv('data/score.csv',index_col='지원번호')
+    df=pd.read_csv("C:/Python/04.데이터시각화/01시각화/data/score.csv",index_col='지원번호')
     df['평균']=df.apply(lambda row:row['국어':'사회'].mean(),axis=1)
     name=df['이름']
     avg=df['평균']
@@ -38,9 +44,15 @@ def graph2():
     for idx, h in enumerate(avg):
         plt.text(idx, h+2, f'{h:.2f}점', color='darkgray',ha='center')
 
+    img=BytesIO()
+    plt.savefig(img, format='png')
+    plt.close()
+    img.seek(0)
+    return send_file(img, mimetype='image/png')
+
 @app.route('/graph3')
 def graph3():
-    df=pd.read_csv('data/score.csv',index_col='지원번호')
+    df=pd.read_csv("C:/Python/04.데이터시각화/01시각화/data/score.csv",index_col='지원번호')
     df['평균']=df.apply(lambda row:row['국어':'사회'].mean(),axis=1)
     group=df.groupby('학교')['평균'].mean()
     sch=group.index
@@ -52,9 +64,15 @@ def graph3():
     for idx, h in enumerate(avg):
         plt.text(idx, h+2, f'{h:.2f}점', color='darkgray',ha='center')
 
+    img=BytesIO()
+    plt.savefig(img, format='png')
+    plt.close()
+    img.seek(0)
+    return send_file(img, mimetype='image/png')
+
 @app.route('/graph4')
 def graph4():
-    df=pd.read_csv('data/score.csv',index_col='지원번호')
+    df=pd.read_csv("C:/Python/04.데이터시각화/01시각화/data/score.csv",index_col='지원번호')
     group=df.groupby('학교')['키'].mean()
     sch=group.index
     height=group.values
@@ -65,10 +83,15 @@ def graph4():
     for idx, h in enumerate(height):
         plt.text(idx, h+2, f'{h:.2f}cm', color='darkgray',ha='center')
 
+    img=BytesIO()
+    plt.savefig(img, format='png')
+    plt.close()
+    img.seek(0)
+    return send_file(img, mimetype='image/png')
 
 @app.route('/graph5')
 def graph5():
-    df=pd.read_csv('data/score.csv',index_col='지원번호')
+    df=pd.read_csv("C:/Python/04.데이터시각화/01시각화/data/score.csv",index_col='지원번호')
     df['SW특기']=df['SW특기'].str.capitalize()
     group=df.groupby('SW특기').size()
     sw=group.index
@@ -81,7 +104,7 @@ def graph5():
         plt.text(idx, h+2, f'{h}명', color='darkgray',ha='center')
 
     img=BytesIO()
-    plt.savfig(img, format='png')
+    plt.savefig(img, format='png')
     plt.close()
     img.seek(0)
     return send_file(img, mimetype='image/png')
