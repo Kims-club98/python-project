@@ -25,16 +25,16 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
                 <form class="mb-2" name="frm">
-                    <div class="input group">
-                        <input class="form-control" placeholder="검색어">
-                        <button class="btn btn-primary" id="buttons">검색</button>
+                    <div class="input-group">
+                        <input name="word" class="form-control" placeholder="검색어">
+                        <button class="btn btn-primary">검색</button>
                     </div>
                 </form>
             </div>
             <div id="health"></div>
             </div>
         </div>
-        <div class="text-center">
+        <div class="text-center" id="buttons">
             <button class="btn btn-primary px-5" id="prev">이전</button>
             <span class="px-3" id="page">1/10</span>
             <button class="btn btn-primary px-5" id="next">다음</button>
@@ -52,7 +52,7 @@
         e.preventDefault(); //default 이벤트를 
         page=1;
         getData();
-    })
+    });
 
     $("#next").on("click",function(){
         page++; //증가연산자
@@ -79,11 +79,12 @@
                 const last=Math.ceil(count/size);
                 $("#page").html(`${page}/${last}`);
 
-                if(page==1)$("#prev").attr("disabled",true);
-                else$("#prev").attr("disabled",false);
+                $("#prev").prop("disabled",page==1);
+                $("#next").prop("disabled",page==last);
 
-                if(page==last)$("#next").attr("disabled",true);
-                else$("#next").attr("disabled",false);
+                // if(page==last)$("#next").attr("disabled",true);
+                // else$("#next").attr("disabled",false);
+
                 if(count==0) $("#buttons").hide();
                 else $("#buttons").show();
 
