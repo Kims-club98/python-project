@@ -1,10 +1,10 @@
 <div class="my-5">
-    <h1 class="text-center">경사하강법</h1>
+    <h1 class="text-center mb-5">{{title}}</h1>
     <div class="row justify-content-center">
         <form class="col-12 col-md-6 mb-3" name="frm">
             <div class="input-group">
                 <input paceholder="공부시간" class="form-control" name="hour">
-                <button class="btn btn-sucess">점수예측</button>
+                <button class="btn btn-success">점수예측</button>
             </div>
         </form>
     </div>
@@ -16,18 +16,19 @@
     </div>
 </div>
 <script>
-    $("#btn").on("click", function(){
-        $("#graph").attr("src","/sgd/graph");
-    });
-
-    $(frm).on("submit", function(){
+    $(frm).on("submit",function(e){ //submit: 엔터를 치면 번쩍 되는 효과
         e.preventDefault();
+        const hour = $(frm.hour).val();
+        if(hour==" "){
+            alert("공부시간을 입력하세요!");
+            return;
+        }
         $.ajax({
             type:"get",
-            url:"/sgd/pred",
-            data:{"hour":$(frm.hour).val()},
+            url:"/linear/sgd/predict",
+            data:{hour},
             success:function(data){
-                alert(data);
+                alert(`${hour}공부시간에 대한 예측점수는 ${data}입니다.`);
             }
         })
     })

@@ -4,6 +4,7 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
 import matplotlib.pyplot as plt
 from io import BytesIO
 
+
 plt.switch_backend('agg')
 app=Flask(__name__, template_folder='temp')
 
@@ -11,7 +12,7 @@ plt.rc('font',family="Malgun Gothic")
 plt.rc('axes', unicode_minus=False)
 
 def model_linear():
-    dataset=pd.read_csv(f'{app.root_path}/data/모델.csv')
+    dataset=pd.read_csv(f'{app.root_path}/data/model.csv')
     X=dataset.iloc[:,:-1].values
     y=dataset.iloc[:,-1].values
     reg=LinearRegression()
@@ -20,16 +21,16 @@ def model_linear():
 
 reg=model_linear()
 
-@app.route('/liner/pred') #최소제곱법 모델생성하여 예측하는 것을 의미
+@app.route('/linear/pred') #최소제곱법 model생성하여 예측하는 것을 의미
 def pred_liner():
     hour=int(request.args['hour'])
     pred=reg[[hour]]
     print(pred[0])
-    return f"{pred[0]:.2f}" #학습된 모델을 소수 둘째자리까지 return
+    return f"{pred[0]:.2f}" #학습된 model을 소수 둘째자리까지 return
 
-@app.route('/liner/graph')
+@app.route('/linear/graph')
 def graph_liner():
-    dataset=pd.read_csv(f'{app.root_path}/data/모델.csv')
+    dataset=pd.read_csv(f'{app.root_path}/data/model.csv')
     X=dataset.iloc[:,:-1].values
     y=dataset.iloc[:,-1].values
     
@@ -47,7 +48,7 @@ def graph_liner():
     return send_file(img, mimetype='image/png')
 
 def model_sgd():
-    dataset=pd.read_csv(f'{app.root_path}/data/모델.csv')
+    dataset=pd.read_csv(f'{app.root_path}/data/model.csv')
     X=dataset.iloc[:,:-1].values
     y=dataset.iloc[:,-1].values
 
@@ -69,7 +70,7 @@ def linear():
 
 @app.route('/sgd/graph')
 def graph_sgd():
-    dataset=pd.read_csv(f'{app.root_path}/data/모델.csv')
+    dataset=pd.read_csv(f'{app.root_path}/data/model.csv')
     X=dataset.iloc[:,:-1].values
     y=dataset.iloc[:,-1].values
 
